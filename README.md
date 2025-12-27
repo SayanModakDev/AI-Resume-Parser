@@ -20,7 +20,7 @@ By implementing **Clustering Analysis** and **Cosine Similarity**, the system gr
 
 ## 📂 Dataset
 This project uses the **Resume Dataset** from Kaggle, which contains text-based resume information and job categories.
-**Note: The dataset file is not included in this repository to save space.**
+* **Note: The dataset file is not included in this repository to save space.**
 
 ## ⚙️ Installation & Setup
 

@@ -27,24 +27,24 @@ def clean_resume(text):
     # Convert to lowercase
     text = text.lower()
     
-    # Remove URLs (http/https/www)
-    text = re.sub('http\S+\s*', ' ', text)
+    # Remove URLs (http/https/www) -- Added 'r' before the string
+    text = re.sub(r'http\S+\s*', ' ', text)
     
     # Remove RT and cc
-    text = re.sub('RT|cc', ' ', text)
+    text = re.sub(r'RT|cc', ' ', text)
     
-    # Remove hashtags and mentions
-    text = re.sub('#\S+', '', text)
-    text = re.sub('@\S+', '  ', text)
+    # Remove hashtags and mentions -- Added 'r'
+    text = re.sub(r'#\S+', '', text)
+    text = re.sub(r'@\S+', '  ', text)
     
-    # Remove punctuation and special characters
-    text = re.sub('[%s]' % re.escape("""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""), ' ', text)
+    # Remove punctuation and special characters -- Added 'r'
+    text = re.sub(r'[%s]' % re.escape("""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""), ' ', text)
     
-    # Remove non-ASCII characters
-    text = re.sub(r'[^\x00-\x7f]',r' ', text) 
+    # Remove non-ASCII characters -- Added 'r'
+    text = re.sub(r'[^\x00-\x7f]', r' ', text) 
     
-    # Remove extra whitespace
-    text = re.sub('\s+', ' ', text)
+    # Remove extra whitespace -- Added 'r'
+    text = re.sub(r'\s+', ' ', text)
     
     # Remove Stopwords
     stop_words = set(stopwords.words('english'))

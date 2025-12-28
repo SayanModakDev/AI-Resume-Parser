@@ -1,3 +1,4 @@
+import string
 import pandas as pd
 import numpy as np
 import re
@@ -27,23 +28,23 @@ def clean_resume(text):
     # Convert to lowercase
     text = text.lower()
     
-    # Remove URLs (http/https/www) -- Added 'r' before the string
+    # Remove URLs
     text = re.sub(r'http\S+\s*', ' ', text)
     
     # Remove RT and cc
     text = re.sub(r'RT|cc', ' ', text)
     
-    # Remove hashtags and mentions -- Added 'r'
+    # Remove hashtags and mentions
     text = re.sub(r'#\S+', '', text)
     text = re.sub(r'@\S+', '  ', text)
     
-    # Remove punctuation and special characters -- Added 'r'
-    text = re.sub(r'[%s]' % re.escape("""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""), ' ', text)
+    # Remove punctuation using the 'string' library (Fixes the warning!)
+    text = text.translate(str.maketrans('', '', string.punctuation))
     
-    # Remove non-ASCII characters -- Added 'r'
+    # Remove non-ASCII characters
     text = re.sub(r'[^\x00-\x7f]', r' ', text) 
     
-    # Remove extra whitespace -- Added 'r'
+    # Remove extra whitespace
     text = re.sub(r'\s+', ' ', text)
     
     # Remove Stopwords
@@ -52,7 +53,7 @@ def clean_resume(text):
     filtered_text = [w for w in word_tokens if not w in stop_words]
     
     return " ".join(filtered_text)
-
+    
 # --- STEP 3: MAIN EXECUTION ---
 def run_resume_parser():
     print("\n--- 1. Loading Dataset ---")
